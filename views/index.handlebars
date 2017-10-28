@@ -1,0 +1,29 @@
+<!DOCTYPE>
+<html lang='en'>
+<head>
+<meta charset="UTF-8">
+</head>
+<body>
+	<ul>   
+		{{#each burgers}}     
+		<li>       
+			<p>Order: {{burger}}</p>       
+			<p>Price: {{cost}}</p>       
+			<p>Quantity: {{amount}}</p>     
+		</li>   
+		{{/each}} 
+	</ul>
+
+	<h2>What would you like to order</h2>
+	<br><br>
+	<form class="menu">
+		<div class="form-group">     
+			<label for="burger">Burger: </label>     
+			<input type="text" id="burger" name="order">   
+		</div>
+	<br>
+	<button type="submit"></button>
+	</form>
+</body>
+</html>
+
