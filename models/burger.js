@@ -17,10 +17,10 @@ var burger = {
     var condition = "id=" + id;
     orm.update("burgers", {
       // need to come back to this
-      name: ,
-      price: ,
-      quanity: ,
-      ts: 
+      name: name,
+      price: price,
+      quanity: quantity,
+      ts: ts
     }, condition, cb);
   }
 };
