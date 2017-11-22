@@ -1,13 +1,60 @@
-var connection = require('./connection.js');
+var connection = require("./connection.js");
 
-// ORM - Object Relational Mapper
 
-orm.selectAll("*", "burgers");
+// function to convert object key/value pairs to SQL syntax
+function objToSql(ob) {
+  var arr = [];
+ // loop through the keys and push the key/value as a string int arr
+  for (var key in ob) {
+    arr.push(key + "=" + ob[key]);
+  }
+  return arr.toString();
+}
+// Object for all SQL statement functions
+var orm = {
+  all: function(tableInput, cb) {
+    var queryString = "SELECT * FROM " + tableInput + ";";
+    connection.query(queryString, function(err, result) {
+      if (err) {
+        throw err;
+      }
+      cb(result);
+    });
+  },
+  create: function(table, cols, vals, cb) {
+    var queryString = "INSERT INTO " + table;
 
-orm.insertOne("*", "order");
+    queryString += " (";
+    queryString += cols.toString();
+    queryString += ") ";
+    queryString += "VALUES (";
+    queryString += ") ";
 
-orm.updateOne("*", "order");
+    console.log(queryString);
 
-// some code to work from incase the code above, which I don't understand, doesn't work.
-/*var orm = {*/   // The last variable cb represents the anonymous function being passed from server.js   selectWhere: function(tableInput, colToSearch, valOfCol, cb) {     var queryString = "SELECT * FROM ?? WHERE ?? = ?";     connection.query(queryString, [tableInput, colToSearch, valOfCol], function(err, result) {       cb(result);     });   } }; module.exports = orm;
+    connection.query(queryString, vals, function(err, result) {
+      if (err) {
+        throw err;
+      }
+      cb(result);
+    });
+  },
+  update: function(table, objColVals, condition, cb) {
+    var queryString = "UPDATE " + table;
+
+    queryString += " SET ";
+    queryString += objToSql(objColVals);
+    queryString += " WHERE ";
+    queryString += condition;
+
+    console.log(queryString);
+    connection.query(queryString, function(err, result) {
+      if (err) {
+        throw err;
+      }
+      cb(result);
+    });
+  }
+};
+
 module.exports = orm;

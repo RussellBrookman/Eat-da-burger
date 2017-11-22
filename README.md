@@ -3,17 +3,9 @@ heroku deployment for sql
 
 instructions
 
-1. npm install express --save
+1. npm install
 
-2. npm install express-handlebars --save
-
-3. npm install method-override --save
-
-4. npm install body-parser --save
-
-5. npm install mysql --save
-
-6. npm install orm
+2. node connection.js
 
 
 

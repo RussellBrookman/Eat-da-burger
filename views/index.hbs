@@ -1,0 +1,23 @@
+<h1>Eat Da Burger</h1>
+	<ul>   
+		{{#each burger_data}}  
+		<pre>{{this.id}}. {{this.burger_name}}. {{this.price}}. {{this.quanity}}</pre>   
+
+		{{this.Date}}
+
+<!-- 		<li>       
+ 	<p>Order: {{burger}}</p>       
+ 	<p>Price: {{cost}}</p>       
+ 	<p>Quantity: {{amount}}</p>     
+ </li>   --> 
+		{{/each}} 
+	</ul>
+
+	<h2>What would you like to order</h2>
+	<br><br>
+	<div class="menu">
+		<form action="/burgers/create" method="POST">    
+			<input type="text" id="burger" name="burger_name">   
+			<button type="submit">Make Order</button>
+		</form>
+	</div>

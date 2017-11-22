@@ -6,11 +6,12 @@ USE burgers_db;
 
 CREATE TABLE burgers (
 	id INTEGER(11) AUTO_INCREMENT NOT NULL,
-	burger_name "",
-	devoured boolean NOT NULL DEFAULT 0,
+	burger_name varchar(25),
+	price INTEGER(3) AUTO_INCREMENT,
+	quantity INTEGER(3) AUTO_INCREMENT,
 	/*default value will be automaticly updated to current timestamp*/
-	ts TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP, 
-	dt DATETIME DEFAULT CURRENT_TIMESTAMP
+	ts TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP, 
 	PRIMARY KEY (id)
 );
+
 

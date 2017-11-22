@@ -1,26 +1,19 @@
 var express = require('express');
 var methodOverride = require('method-override');
 var bodyParser = require('body-parser');
-var mysql = require('mysql');
+var PORT = process.env.PORT ||4500;
+var app = express();
 
-var connection = mysql.createConnection({
-	host: "localhost",
-	port: 3500,
-	user: "root",
-	password: "ABC123",
-	database: "burgers_db"
+app.use(express.static(__dirname + "/public"));
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(methodOverride("_method"));
+var exphbs = require("express-handlebars");
+app.engine("handlebars", exphbs({ defaultLayout: "main" }));
+app.set("view engine", "handlebars");
+var routes = require("./controllers/burgersController.js");
+app.use("/", routes);
+app.use("/update", routes);
+app.use("/create", routes);
+app.listen(PORT, function() {
+  console.log("Listening on port:%s", PORT);
 });
-
-connection.connect(function(err) {
-	if (err) throw err;
-	console.log("connected as id " + connection.threadId);
-	afterConnect();
-});
-
-function afterConnect() {
-	connection.query("SELECT * FROM burgers", function(err, res) {
-		if (err) throw err;
-		console.log(res);
-		connection.end();
-	})
-}
